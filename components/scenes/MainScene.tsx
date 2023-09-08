@@ -1,6 +1,6 @@
 import { Center, Environment, Lightformer } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
-// import { DepthOfField, EffectComposer } from '@react-three/postprocessing'
+import { EffectComposer, TiltShift2 } from '@react-three/postprocessing'
 import { useLenis } from '@studio-freight/react-lenis'
 import { val } from '@theatre/core'
 import { PerspectiveCamera, editable, useCurrentSheet } from '@theatre/r3f'
@@ -200,26 +200,6 @@ export function WebGL() {
         /> */}
       </Center>
 
-      {/* <AccumulativeShadows
-        temporal
-        frames={100}
-        color="orange"
-        colorBlend={2}
-        toneMapped={true}
-        alphaTest={0.9}
-        opacity={2}
-        scale={12}
-      >
-        <RandomizedLight
-          amount={8}
-          radius={4}
-          ambient={0.5}
-          intensity={1}
-          position={[5, 5, -10]}
-          bias={0.001}
-        />
-      </AccumulativeShadows> */}
-
       {/* <Environment
         preset="sunset"
         background
@@ -228,17 +208,18 @@ export function WebGL() {
       /> */}
       <Env perfSucks={false} />
 
-      {/* <EffectComposer>
-        <DepthOfField
+      <EffectComposer>
+        {/* <DepthOfField
           focusDistance={0}
           focalLength={0.02}
           bokehScale={2}
           height={480}
         /> */}
-      {/* <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} /> */}
-      {/* <Noise opacity={0.02} /> */}
-      {/* <Vignette eskil={false} offset={0.1} darkness={0.5} /> */}
-      {/* </EffectComposer> */}
+        <TiltShift2 blur={0.2} />
+        {/* <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} /> */}
+        {/* <Noise opacity={0.12} /> */}
+        {/* <Vignette eskil={false} offset={0.1} darkness={0.5} /> */}
+      </EffectComposer>
     </>
   )
 }
