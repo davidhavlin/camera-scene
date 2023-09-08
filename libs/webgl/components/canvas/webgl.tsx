@@ -1,5 +1,5 @@
 // import state from '@/config/state.json'
-import state from '@/public/config/outloud.theatre-project-state.json'
+import state from '@/public/config/outloud.theatre-prod.json'
 import { Canvas } from '@react-three/fiber'
 import { getProject } from '@theatre/core'
 import { SheetProvider } from '@theatre/r3f'
