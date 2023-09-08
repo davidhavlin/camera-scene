@@ -15,18 +15,17 @@ export function WebGLCanvas() {
   return (
     <div className={s.webgl}>
       <Canvas
-        gl={
-          {
-            // powerPreference: 'high-performance',
-            // antialias: true,
-            // alpha: true,
-            // stencil: false,
-            // depth: true,
-          }
-        }
+        gl={{
+          // powerPreference: 'high-performance',
+          preserveDrawingBuffer: true,
+          antialias: false,
+          alpha: true,
+          // stencil: false,
+          // depth: true,
+        }}
         shadows
         dpr={[1, 2]}
-        eventPrefix="client"
+        // eventPrefix="client"
         // orthographic
         // camera={{ position: [0, 0, 5000], near: 0.001, far: 10000, zoom: 1 }}
         frameloop="never"

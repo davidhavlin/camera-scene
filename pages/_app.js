@@ -70,7 +70,7 @@ function MyApp({ Component, pageProps }) {
       <DeviceDetectionProvider>
         <ProjectProvider
           id="Satus"
-          config="/config/Satus-2023-04-17T12_55_21.json"
+          config="/config/outloud.theatre-project-state.json"
         >
           <RafDriverProvider id="default">
             <Component {...pageProps} />

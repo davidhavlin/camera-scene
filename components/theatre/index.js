@@ -25,6 +25,9 @@ export function Theatre() {
     if (studio.__initialized) return
 
     studio.initialize({ __experimental_rafDriver: raf })
+    console.log('====================================')
+    console.log('asd')
+    console.log('====================================')
     studio.extend(extension)
 
     studio.__initialized = true
@@ -94,7 +97,7 @@ export function Theatre() {
             'config.json',
             {
               type: 'application/json',
-            }
+            },
           )
           const url = URL.createObjectURL(file)
           const a = document.createElement('a')

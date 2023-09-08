@@ -17,6 +17,7 @@ export function Studio() {
     if (rafDriver && !initialized) {
       studio.initialize({ __experimental_rafDriver: rafDriver }).then(() => {
         console.log('Studio initialized')
+        // studio.extend(extension)
       })
 
       initialized = true
