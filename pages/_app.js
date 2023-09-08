@@ -69,7 +69,7 @@ function MyApp({ Component, pageProps }) {
       <RealViewport />
       <DeviceDetectionProvider>
         <ProjectProvider
-          id="Satus"
+          id="outloud"
           config="/config/outloud.theatre-project-state.json"
         >
           <RafDriverProvider id="default">
