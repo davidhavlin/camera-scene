@@ -7,9 +7,12 @@ import {
   RandomizedLight,
 } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
+import { EffectComposer, Vignette } from '@react-three/postprocessing'
+import { PerspectiveCamera, useCurrentSheet } from '@theatre/r3f'
 import { useCanvas } from 'libs/webgl/hooks/use-canvas'
 import { useRef } from 'react'
-import s from './CameraScene.module.scss'
+import EGroup from '../EGroup'
+import s from './MainScene.module.scss'
 import { Model } from './Model'
 
 // const WebGL = dynamic(
@@ -22,6 +25,8 @@ import { Model } from './Model'
 export function WebGL() {
   // const { nodes, materials } = useGLTF('/glass-transformed.glb')
   const meshRef = useRef()
+  const sheet = useCurrentSheet()
+  console.log({ sheet })
 
   useFrame((_, deltaTime) => {
     // meshRef.current.rotation.x += deltaTime
@@ -30,6 +35,15 @@ export function WebGL() {
 
   return (
     <>
+      {/* <CameraGroup /> */}
+      <PerspectiveCamera
+        theatreKey="Camera"
+        makeDefault
+        position={[20, 0.9, 20]}
+        fov={26}
+        near={0.1}
+        far={70}
+      />
       {/* <Stage shadows="accumulative"> */}
       {/* <color args={['ivory']} attach="background" /> */}
       <color attach="background" args={['#f0f0f0']} />
@@ -37,12 +51,24 @@ export function WebGL() {
 
       <Center>
         <group position={[0, -0.5, 0]} rotation={[0, -0.75, 0]}>
-          {/* <Center> */}
-          {/* <group position={[0, 1, 0]} rotation={[0, -0.75, 0]} dispose={null}> */}
-          <group dispose={null}>
+          <EGroup theatreKey="model">
             <Model />
-          </group>
-          {/* </Center> */}
+          </EGroup>
+          <EGroup theatreKey="model-2">
+            <Model />
+          </EGroup>
+          <EGroup theatreKey="model-3">
+            <Model />
+          </EGroup>
+          {/* <group position={[0, 1, 0]} rotation={[0, -0.75, 0]} dispose={null}> */}
+          {/* <Group theatreKey="main-model">
+          </Group>
+          <Group theatreKey="second-model">
+            <Model />
+          </Group>
+          <Group theatreKey="third-model">
+            <Model />
+          </Group> */}
 
           <AccumulativeShadows
             frames={100}
@@ -89,6 +115,18 @@ export function WebGL() {
 
       {/* <Environment preset="sunset" background blur={0} /> */}
       <Env perfSucks={false} />
+
+      <EffectComposer>
+        {/* <DepthOfField
+          focusDistance={0}
+          focalLength={0.02}
+          bokehScale={2}
+          height={480}
+        /> */}
+        {/* <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} /> */}
+        {/* <Noise opacity={0.02} /> */}
+        <Vignette eskil={false} offset={0.1} darkness={0.5} />
+      </EffectComposer>
     </>
   )
 }
@@ -165,7 +203,7 @@ function Env({ perfSucks }: any) {
   )
 }
 
-export function CameraScene() {
+export function MainScene() {
   const { WebGLTunnel } = useCanvas()
 
   return (

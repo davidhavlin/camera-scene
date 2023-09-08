@@ -1,4 +1,4 @@
-import { CameraScene } from '@/components/scenes/CameraScene'
+import { MainScene } from '@/components/scenes/MainScene'
 import { Layout } from 'layouts/default'
 import { Canvas } from 'libs/webgl/components/canvas'
 
@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <Canvas>
       <Layout theme="light" className={''}>
-        <CameraScene />
+        <MainScene />
       </Layout>
     </Canvas>
   )

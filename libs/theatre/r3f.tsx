@@ -14,6 +14,18 @@ export function Group({
 
   const sheet = useCurrentSheet()
 
+  const onValuesChange = ({ position, rotation, scale, visible }: any) => {
+    if (!groupRef.current) return
+
+    groupRef.current.visible = visible
+
+    groupRef.current.position.set(position.x, position.y, position.z)
+    groupRef.current.rotation.set(rotation.x, rotation.y, rotation.z)
+    groupRef.current.scale.set(scale.x, scale.y, scale.z)
+
+    groupRef.current.updateMatrix()
+  }
+
   useTheatre(
     sheet,
     theatreKey,
@@ -35,16 +47,8 @@ export function Group({
       },
       visible: true,
     },
-    ({ position, rotation, scale, visible }) => {
-      if (!groupRef.current) return
-
-      groupRef.current.visible = visible
-
-      groupRef.current.position.set(position.x, position.y, position.z)
-      groupRef.current.rotation.set(rotation.x, rotation.y, rotation.z)
-      groupRef.current.scale.set(scale.x, scale.y, scale.z)
-
-      groupRef.current.updateMatrix()
+    {
+      onValuesChange,
     },
   )
 

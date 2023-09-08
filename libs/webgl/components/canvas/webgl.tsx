@@ -1,11 +1,17 @@
+import state from '@/config/state.json'
 import { Canvas } from '@react-three/fiber'
+import { getProject } from '@theatre/core'
+import { SheetProvider } from '@theatre/r3f'
 import { Suspense } from 'react'
 import { useCanvas } from '../../hooks/use-canvas'
 import { RAF } from '../raf'
 import s from './webgl.module.scss'
 
+const sheet = getProject('outloud', { state: state }).sheet('Scene')
+
 export function WebGLCanvas() {
   const { WebGLTunnel, DOMTunnel } = useCanvas()
+  console.log({ sheet })
 
   return (
     <div className={s.webgl}>
@@ -25,29 +31,37 @@ export function WebGLCanvas() {
         // orthographic
         // camera={{ position: [0, 0, 5000], near: 0.001, far: 10000, zoom: 1 }}
         frameloop="never"
-        camera={{ position: [20, 0.9, 20], fov: 26 }}
+        // camera={{ position: [20, 0.9, 20], fov: 26 }}
         //   linear
         flat
       >
-        <Suspense>
-          {/* <OrthographicCamera
+        <SheetProvider sheet={sheet}>
+          {/* <SheetProvider id="WebGL"> */}
+          <Suspense>
+            {/* <OrthographicCamera
             makeDefault
             position={[0, 0, 5000]}
             near={0.001}
             far={10000}
             zoom={1}
           /> */}
-          {/* <PerspectiveCamera
-            makeDefault
-            position={[0, 0, 5]}
-            // near={0.001}
-            // far={10000}
-            // zoom={1}
-          /> */}
-          <RAF />
-          {/* <PostProcessing /> */}
-          <WebGLTunnel.Out />
-        </Suspense>
+            {/* <Group theatreKey="camera"> */}
+            {/* <CameraGroup /> */}
+            {/* <PerspectiveCamera
+                makeDefault
+                position={[20, 0.9, 20]}
+                fov={26}
+                // near={0.001}
+                // far={10000}
+                // zoom={1}
+              /> */}
+            {/* </Group> */}
+            <RAF />
+            {/* <PostProcessing /> */}
+            <WebGLTunnel.Out />
+          </Suspense>
+          {/* </SheetProvider> */}
+        </SheetProvider>
       </Canvas>
       <DOMTunnel.Out />
     </div>

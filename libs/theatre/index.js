@@ -6,7 +6,6 @@ import {
   useContext,
   useEffect,
   useImperativeHandle,
-  useMemo,
   useRef,
   useState,
 } from 'react'
@@ -77,12 +76,12 @@ const SheetContext = createContext()
 export function useSheet(id, instance) {
   const project = useCurrentProject()
 
-  const sheet = useMemo(
-    () => project?.sheet(id, instance),
-    [project, id, instance],
-  )
+  // const sheet = useMemo(
+  //   () => project?.sheet(id, instance),
+  //   [project, id, instance],
+  // )
 
-  return sheet
+  return null
 }
 
 export const SheetProvider = forwardRef(function SheetProvider(
