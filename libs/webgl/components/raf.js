@@ -9,4 +9,6 @@ export function RAF({ render = true }) {
       advance(time / 1000)
     }
   }, 1)
+
+  return null
 }

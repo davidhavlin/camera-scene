@@ -27,16 +27,14 @@ import { Model } from './Model'
 export function WebGL() {
   // const { nodes, materials } = useGLTF('/glass-transformed.glb')
   const meshRef = useRef()
-  const sheet = useCurrentSheet()
+  const sheet = useCurrentSheet()!
   console.log({ sheet })
 
-  const asd = useLenis((l) => {
+  useLenis((l: any) => {
     const sequenceLength = val(sheet.sequence.pointer.length)
-    console.log('scroll', { sequenceLength, l })
     // update the "position" of the playhead in the sequence, as a fraction of its whole length
-    // sheet.sequence.position = scroll.offset * sequenceLength;
+    sheet.sequence.position = l.progress * sequenceLength
   })
-  console.log({ asd })
 
   useFrame((_, deltaTime) => {
     // meshRef.current.rotation.x += deltaTime
@@ -53,6 +51,9 @@ export function WebGL() {
         fov={26}
         near={0.1}
         far={70}
+        attachArray={undefined}
+        attachObject={undefined}
+        attachFns={undefined}
       />
       {/* <Stage shadows="accumulative"> */}
       {/* <color args={['ivory']} attach="background" /> */}
@@ -142,7 +143,7 @@ export function WebGL() {
 }
 
 function Env({ perfSucks }: any) {
-  const ref = useRef()
+  const ref = useRef<any>()
   useFrame((state, delta) => {
     if (!perfSucks) {
       // easing.damp3(ref.current.rotation, [Math.PI / 2, 0, state.clock.elapsedTime / 5 + state.pointer.x], 0.2, delta)

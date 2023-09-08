@@ -11,7 +11,6 @@ const sheet = getProject('outloud', { state: state }).sheet('Scene')
 
 export function WebGLCanvas() {
   const { WebGLTunnel, DOMTunnel } = useCanvas()
-  console.log({ sheet })
 
   return (
     <div className={s.webgl}>
