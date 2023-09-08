@@ -8,6 +8,8 @@ import {
 } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { EffectComposer, Vignette } from '@react-three/postprocessing'
+import { useLenis } from '@studio-freight/react-lenis'
+import { val } from '@theatre/core'
 import { PerspectiveCamera, useCurrentSheet } from '@theatre/r3f'
 import { useCanvas } from 'libs/webgl/hooks/use-canvas'
 import { useRef } from 'react'
@@ -27,6 +29,14 @@ export function WebGL() {
   const meshRef = useRef()
   const sheet = useCurrentSheet()
   console.log({ sheet })
+
+  const asd = useLenis((l) => {
+    const sequenceLength = val(sheet.sequence.pointer.length)
+    console.log('scroll', { sequenceLength, l })
+    // update the "position" of the playhead in the sequence, as a fraction of its whole length
+    // sheet.sequence.position = scroll.offset * sequenceLength;
+  })
+  console.log({ asd })
 
   useFrame((_, deltaTime) => {
     // meshRef.current.rotation.x += deltaTime
